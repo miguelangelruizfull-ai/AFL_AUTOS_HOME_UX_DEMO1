@@ -13,12 +13,12 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:
 .topin{height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.15em;font-weight:800}.brand strong{display:block;margin-top:2px;font-size:18px}
 .badge{font-size:10px;font-weight:900;border:1px solid var(--line);border-radius:999px;padding:7px 9px}
 .main{padding-top:16px}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.metric{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px;min-height:86px;text-align:left;color:var(--text)}
-.metric strong{font-size:24px;display:block}.metric span{font-size:11px;color:var(--muted);display:block;margin-top:5px}.metric.active{outline:1px solid #fff}
+.metric strong{font-size:24px;display:block}.metric span{font-size:11px;color:var(--muted);display:block;margin-top:5px}.metric.active{outline:1px solid #fff}.agenda{margin-top:10px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,#151a20,#11151a);padding:13px}.agenda strong{display:block;font-size:14px}.agenda span{display:block;color:var(--muted);font-size:11px;margin-top:5px;line-height:1.4}
 .toolbar{display:grid;gap:8px;margin:14px 0}.toolbar .row{display:grid;grid-template-columns:1fr;gap:8px}.field,select,input,textarea{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:13px;min-height:46px;padding:0 12px}
 textarea{padding:12px;min-height:88px;resize:vertical}.btn{border:1px solid var(--line);border-radius:13px;min-height:46px;padding:0 14px;font-weight:900;font-size:12px;background:var(--panel2);color:var(--text)}
 .btn.primary{background:#f2f4f5;color:#111;border-color:#f2f4f5}.btn.danger{color:#ffb1b1}.btn.ok{color:#aef0c2}.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:16px 0 8px}.sectionhead h2{font-size:17px;margin:0}.sectionhead span{color:var(--muted);font-size:11px}
 .leads{display:grid;gap:8px}.lead{border:1px solid var(--line);border-radius:17px;background:var(--panel);padding:14px}.leadtop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.leadname{font-size:15px;font-weight:900}.sub{font-size:11px;color:var(--muted);margin-top:4px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.tag{font-size:9px;font-weight:900;border:1px solid var(--line);border-radius:999px;padding:6px 7px}.tag.wa{color:#aef0c2}.tag.msg{color:#a9ceff}.tag.overdue{color:#ffaaaa;border-color:rgba(228,125,125,.45)}.tag.today{color:#f5d28c;border-color:rgba(227,180,94,.45)}
-.next{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}.next small{color:var(--muted);font-size:10px}.next strong{display:block;font-size:13px;margin-top:3px;line-height:1.4}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}
+.next{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}.next small{color:var(--muted);font-size:10px}.next strong{display:block;font-size:13px;margin-top:3px;line-height:1.4}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:11px}.quickdates{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:7px}.quickdates button{min-height:40px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);color:var(--text);font-size:10px;font-weight:900}
 .empty{border:1px dashed var(--line);border-radius:17px;padding:28px;text-align:center;color:var(--muted);font-size:13px}
 .nav{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px 10px 10px;background:rgba(10,12,15,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:25}.nav button{border:0;border-radius:12px;min-height:52px;background:transparent;color:var(--muted);font-size:10px;font-weight:900}.nav button.active{background:var(--panel2);color:var(--text)}
 .modalback{position:fixed;inset:0;background:rgba(0,0,0,.68);display:none;align-items:flex-end;justify-content:center;padding:10px;z-index:50}.modalback.open{display:flex}.modal{width:min(720px,100%);max-height:92dvh;overflow:auto;background:#101419;border:1px solid var(--line);border-radius:22px;padding:16px}.modal h2{margin:0 0 4px;font-size:20px}.modal p{margin:0 0 14px;color:var(--muted);font-size:12px}.formgrid{display:grid;gap:9px}.formgrid label{font-size:11px;color:var(--muted);display:grid;gap:5px}.modalactions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.note{font-size:10px;color:var(--muted);line-height:1.5;margin:18px 2px}
@@ -36,6 +36,7 @@ textarea{padding:12px;min-height:88px;resize:vertical}.btn{border:1px solid var(
 <button class="metric" data-filterdate="today"><strong id="mToday">0</strong><span>Hoy</span></button>
 <button class="metric" data-filterdate="upcoming"><strong id="mNext">0</strong><span>Próximos</span></button>
 </section>
+<section class="agenda"><strong id="agendaTitle">Agenda de seguimiento</strong><span id="agendaSummary">Sin seguimientos programados.</span></section>
 
 <section class="toolbar">
 <div class="row">
@@ -69,7 +70,7 @@ textarea{padding:12px;min-height:88px;resize:vertical}.btn{border:1px solid var(
 <label>Vehículo de interés<input id="vehicle" placeholder="Ej. Tiguan SE 2018"></label>
 <label>Etapa<select id="leadStage"><option>NUEVO</option><option>CONTACTADO</option><option>INFORMACION_ENVIADA</option><option>SEGUIMIENTO</option><option>CITA_PROGRAMADA</option><option>NEGOCIACION</option><option>GANADO</option><option>PERDIDO</option><option>PAUSADO</option></select></label>
 <label>Prioridad<select id="priority"><option>NORMAL</option><option>ALTA</option><option>BAJA</option></select></label>
-<label>Próximo seguimiento<input id="followup" type="datetime-local"></label>
+<label>Próximo seguimiento<input id="followup" type="datetime-local"><div class="quickdates"><button type="button" data-quick="today">HOY +2H</button><button type="button" data-quick="tomorrow">MAÑANA 10:00</button><button type="button" data-quick="3days">+3 DÍAS</button><button type="button" data-quick="7days">+7 DÍAS</button></div></label>
 <label>Última interacción<input id="lastContact" type="datetime-local"></label>
 <label class="wide">Próxima acción<input id="nextAction" placeholder="Ej. enviar fotos y confirmar si agenda visita"></label>
 <label class="wide">Notas<textarea id="notes" placeholder="Contexto breve del seguimiento"></textarea></label>
@@ -101,6 +102,10 @@ function render(){
  $('mOver').textContent=active.filter(l=>bucket(l)==='overdue').length;
  $('mToday').textContent=active.filter(l=>bucket(l)==='today').length;
  $('mNext').textContent=active.filter(l=>bucket(l)==='upcoming').length;
+ const overdue=active.filter(l=>bucket(l)==='overdue').length, today=active.filter(l=>bucket(l)==='today').length;
+ const nextLead=active.filter(l=>l.followup).sort((a,b)=>new Date(a.followup)-new Date(b.followup))[0];
+ $('agendaTitle').textContent=overdue?overdue+' seguimiento'+(overdue===1?' vencido':'s vencidos'):today?today+' seguimiento'+(today===1?' para hoy':'s para hoy'):'Agenda al día';
+ $('agendaSummary').textContent=overdue?'Prioridad: atender vencidos antes de programar nuevos contactos.':today?'Tienes contactos programados hoy.':'Próximo: '+(nextLead?fmt(nextLead.followup)+' · '+nextLead.name:'sin seguimientos programados');
  let rows=leads.filter(l=>{
    if(ch&&l.channel!==ch)return false;if(st&&l.stage!==st)return false;
    if(dateFilter!=='all'&&bucket(l)!==dateFilter)return false;
@@ -116,7 +121,7 @@ function render(){
     <div class="leadtop"><div><div class="leadname">${esc(l.name)}</div><div class="sub">${esc(l.vehicle||'Sin vehículo asociado')}</div></div><span class="tag ${l.channel==='WHATSAPP'?'wa':'msg'}">${esc(l.channel)}</span></div>
     <div class="tags"><span class="tag">${esc(l.stage)}</span><span class="tag ${cls}">${b==='overdue'?'VENCIDO':b==='today'?'HOY':b==='upcoming'?'PRÓXIMO':'SIN FECHA'}</span><span class="tag">${esc(l.priority||'NORMAL')}</span></div>
     <div class="next"><small>PRÓXIMA ACCIÓN · ${esc(fmt(l.followup))}</small><strong>${esc(l.nextAction||'Definir próximo paso')}</strong></div>
-    <div class="actions"><button class="btn ok" onclick="contacted('${l.id}')">CONTACTADO</button><button class="btn" onclick="editLead('${l.id}')">ABRIR</button></div>
+    <div class="actions"><button class="btn ok" onclick="contacted('${l.id}')">CONTACTADO</button><button class="btn" onclick="reschedule('${l.id}')">REPROGRAMAR</button><button class="btn" onclick="exportICS('${l.id}')">CALENDARIO</button></div><div class="actions" style="grid-template-columns:1fr"><button class="btn" onclick="editLead('${l.id}')">ABRIR DETALLE</button></div>
    </article>`
  }).join(''):'<div class="empty">No hay leads en esta vista.</div>';
 }
@@ -126,6 +131,24 @@ function openModal(l=null){
  $('modalBack').classList.add('open')
 }
 function editLead(id){openModal(leads.find(x=>x.id===id))}
+function reschedule(id){const l=leads.find(x=>x.id===id);if(!l)return;openModal(l);setTimeout(()=>$('followup').focus(),50)}
+function localValue(d){const z=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())+'T'+z(d.getHours())+':'+z(d.getMinutes())}
+function quickSchedule(mode){
+ const d=new Date();
+ if(mode==='today')d.setHours(d.getHours()+2,0,0,0);
+ if(mode==='tomorrow'){d.setDate(d.getDate()+1);d.setHours(10,0,0,0)}
+ if(mode==='3days'){d.setDate(d.getDate()+3);d.setHours(10,0,0,0)}
+ if(mode==='7days'){d.setDate(d.getDate()+7);d.setHours(10,0,0,0)}
+ $('followup').value=localValue(d)
+}
+function icsEsc(v=''){return String(v).replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;')}
+function exportICS(id){
+ const l=leads.find(x=>x.id===id);if(!l||!l.followup){alert('Este lead no tiene fecha de seguimiento.');return}
+ const start=new Date(l.followup), end=new Date(start.getTime()+30*60000);
+ const stamp=d=>d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+ const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//AFL AUTOS//Seguimiento Leads//ES','BEGIN:VEVENT','UID:'+l.id+'@afl-autos-demo','DTSTAMP:'+stamp(new Date()),'DTSTART:'+stamp(start),'DTEND:'+stamp(end),'SUMMARY:'+icsEsc('Seguimiento AFL AUTOS · '+l.name),'DESCRIPTION:'+icsEsc((l.vehicle||'')+' | '+(l.nextAction||'Seguimiento comercial')),'END:VEVENT','END:VCALENDAR'].join('\r\n');
+ const blob=new Blob([ics],{type:'text/calendar;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='seguimiento-'+(l.name||'lead').replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.ics';a.click();URL.revokeObjectURL(a.href)
+}
 function contacted(id){
  const l=leads.find(x=>x.id===id);if(!l)return;
  l.lastContact=new Date().toISOString().slice(0,16);
@@ -139,6 +162,7 @@ $('saveLead').onclick=()=>{
  leads=old?leads.map(x=>x.id===id?obj:x):[obj,...leads];$('modalBack').classList.remove('open');save()
 };
 $('newLead').onclick=()=>openModal();$('cancelModal').onclick=()=>$('modalBack').classList.remove('open');
+document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>quickSchedule(b.dataset.quick)));
 $('modalBack').onclick=e=>{if(e.target===$('modalBack'))$('modalBack').classList.remove('open')};
 ['search','channel','stage'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',render));
 document.querySelectorAll('[data-filterdate]').forEach(b=>b.onclick=()=>{dateFilter=b.dataset.filterdate;document.querySelectorAll('[data-filterdate]').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()});
@@ -148,7 +172,7 @@ $('exportBtn').onclick=()=>{
 };
 $('importBtn').onclick=()=>$('importFile').click();
 $('importFile').onchange=async e=>{try{const j=JSON.parse(await e.target.files[0].text());if(!Array.isArray(j.leads))throw 0;if(confirm('Esto reemplazará los leads actuales de esta demo.')){leads=j.leads;save()}}catch{alert('JSON no válido')}e.target.value=''};
-window.editLead=editLead;window.contacted=contacted;render();
+window.editLead=editLead;window.contacted=contacted;window.reschedule=reschedule;window.exportICS=exportICS;render();
 </script>
 </body>
 </html>
