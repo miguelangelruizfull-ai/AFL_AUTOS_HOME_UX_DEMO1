@@ -68,3 +68,27 @@ NUEVO MENSAJE
 ## Próxima fase productiva
 
 Conectar la UI con la fuente privada comercial vigente, manteniendo GitHub público como frontend/demo y sin convertir JSON público en maestro.
+
+
+## Iteración autorizada — Agenda operativa
+
+Se agregó:
+
+- resumen de agenda al abrir la Home;
+- prioridad visual para vencidos y seguimientos de hoy;
+- botón `REPROGRAMAR` por lead;
+- atajos `HOY +2H`, `MAÑANA 10:00`, `+3 DÍAS`, `+7 DÍAS`;
+- exportación individual a calendario mediante `.ics`;
+- botón `ABRIR DETALLE` separado de acciones rápidas.
+
+Objetivo UX:
+
+```text
+VER PRIORIDAD
+→ CONTACTAR
+→ REGISTRAR RESULTADO
+→ REPROGRAMAR
+→ CALENDARIO
+```
+
+La agenda de la demo sigue siendo local al navegador y no reemplaza una agenda o CRM productivo.
