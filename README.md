@@ -23,7 +23,11 @@ La interfaz permite:
 - marcar contacto realizado;
 - reprogramar;
 - filtrar por canal y etapa;
-- exportar/importar JSON para respaldo manual.
+- exportar/importar JSON para respaldo manual;
+- reprogramar seguimientos desde cada tarjeta;
+- usar atajos de fecha: hoy +2 h, mañana 10:00, +3 días y +7 días;
+- exportar un seguimiento individual a calendario mediante archivo `.ics`;
+- mostrar un resumen de agenda al abrir la Home.
 
 ### Estados comerciales
 
@@ -92,5 +96,7 @@ CRM_LIGERO
 MOBILE_FIRST
 MESSENGER + WHATSAPP
 PROGRAMACION_DE_SEGUIMIENTOS
+REPROGRAMACION_RAPIDA
+EXPORTACION_CALENDARIO_ICS
 NO_PRODUCTIVO
 ```
