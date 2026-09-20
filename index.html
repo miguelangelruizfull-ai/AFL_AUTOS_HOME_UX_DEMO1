@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0c0f">
+<title>AFL AUTOS · Leads Demo 1</title>
+<style>
+:root{color-scheme:dark;--bg:#0a0c0f;--panel:#11151a;--panel2:#171c22;--line:#2a313a;--text:#f5f7f8;--muted:#98a3ae;--ok:#66d38a;--warn:#e3b45e;--bad:#e47d7d;--blue:#84b7ff;--radius:18px}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:100dvh;padding-bottom:86px}.wrap{width:min(1180px,100%);margin:auto;padding:0 14px}
+.top{position:sticky;top:0;z-index:20;background:rgba(10,12,15,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topin{height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.15em;font-weight:800}.brand strong{display:block;margin-top:2px;font-size:18px}
+.badge{font-size:10px;font-weight:900;border:1px solid var(--line);border-radius:999px;padding:7px 9px}
+.main{padding-top:16px}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.metric{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px;min-height:86px;text-align:left;color:var(--text)}
+.metric strong{font-size:24px;display:block}.metric span{font-size:11px;color:var(--muted);display:block;margin-top:5px}.metric.active{outline:1px solid #fff}
+.toolbar{display:grid;gap:8px;margin:14px 0}.toolbar .row{display:grid;grid-template-columns:1fr;gap:8px}.field,select,input,textarea{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:13px;min-height:46px;padding:0 12px}
+textarea{padding:12px;min-height:88px;resize:vertical}.btn{border:1px solid var(--line);border-radius:13px;min-height:46px;padding:0 14px;font-weight:900;font-size:12px;background:var(--panel2);color:var(--text)}
+.btn.primary{background:#f2f4f5;color:#111;border-color:#f2f4f5}.btn.danger{color:#ffb1b1}.btn.ok{color:#aef0c2}.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:16px 0 8px}.sectionhead h2{font-size:17px;margin:0}.sectionhead span{color:var(--muted);font-size:11px}
+.leads{display:grid;gap:8px}.lead{border:1px solid var(--line);border-radius:17px;background:var(--panel);padding:14px}.leadtop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.leadname{font-size:15px;font-weight:900}.sub{font-size:11px;color:var(--muted);margin-top:4px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.tag{font-size:9px;font-weight:900;border:1px solid var(--line);border-radius:999px;padding:6px 7px}.tag.wa{color:#aef0c2}.tag.msg{color:#a9ceff}.tag.overdue{color:#ffaaaa;border-color:rgba(228,125,125,.45)}.tag.today{color:#f5d28c;border-color:rgba(227,180,94,.45)}
+.next{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}.next small{color:var(--muted);font-size:10px}.next strong{display:block;font-size:13px;margin-top:3px;line-height:1.4}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}
+.empty{border:1px dashed var(--line);border-radius:17px;padding:28px;text-align:center;color:var(--muted);font-size:13px}
+.nav{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px 10px 10px;background:rgba(10,12,15,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:25}.nav button{border:0;border-radius:12px;min-height:52px;background:transparent;color:var(--muted);font-size:10px;font-weight:900}.nav button.active{background:var(--panel2);color:var(--text)}
+.modalback{position:fixed;inset:0;background:rgba(0,0,0,.68);display:none;align-items:flex-end;justify-content:center;padding:10px;z-index:50}.modalback.open{display:flex}.modal{width:min(720px,100%);max-height:92dvh;overflow:auto;background:#101419;border:1px solid var(--line);border-radius:22px;padding:16px}.modal h2{margin:0 0 4px;font-size:20px}.modal p{margin:0 0 14px;color:var(--muted);font-size:12px}.formgrid{display:grid;gap:9px}.formgrid label{font-size:11px;color:var(--muted);display:grid;gap:5px}.modalactions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.note{font-size:10px;color:var(--muted);line-height:1.5;margin:18px 2px}
+@media(min-width:720px){.metrics{grid-template-columns:repeat(4,1fr)}.toolbar .row{grid-template-columns:1fr 180px 180px auto}.leads{grid-template-columns:repeat(2,1fr)}.nav{left:50%;right:auto;transform:translateX(-50%);width:min(760px,calc(100% - 40px));border:1px solid var(--line);border-radius:18px 18px 0 0}.formgrid{grid-template-columns:1fr 1fr}.formgrid .wide{grid-column:1/-1}}
+@media(min-width:1050px){.wrap{padding:0 24px}.app{padding-bottom:32px}.nav{display:none}.leads{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="wrap topin"><div class="brand"><small>AFL AUTOS / COMERCIAL</small><strong>Seguimiento de Leads</strong></div><span class="badge">DEMO 1 · LOCAL</span></div></header>
+<main class="wrap main">
+<section class="metrics">
+<button class="metric active" data-filterdate="all"><strong id="mAll">0</strong><span>Activos</span></button>
+<button class="metric" data-filterdate="overdue"><strong id="mOver">0</strong><span>Vencidos</span></button>
+<button class="metric" data-filterdate="today"><strong id="mToday">0</strong><span>Hoy</span></button>
+<button class="metric" data-filterdate="upcoming"><strong id="mNext">0</strong><span>Próximos</span></button>
+</section>
+
+<section class="toolbar">
+<div class="row">
+<input id="search" placeholder="Buscar nombre, vehículo o próxima acción">
+<select id="channel"><option value="">Todos los canales</option><option>WHATSAPP</option><option>MESSENGER</option></select>
+<select id="stage"><option value="">Todas las etapas</option><option>NUEVO</option><option>CONTACTADO</option><option>INFORMACION_ENVIADA</option><option>SEGUIMIENTO</option><option>CITA_PROGRAMADA</option><option>NEGOCIACION</option><option>GANADO</option><option>PERDIDO</option><option>PAUSADO</option></select>
+<button class="btn primary" id="newLead">+ LEAD</button>
+</div>
+<div class="row" style="grid-template-columns:1fr 1fr">
+<button class="btn" id="exportBtn">EXPORTAR JSON</button>
+<button class="btn" id="importBtn">IMPORTAR JSON</button>
+<input type="file" id="importFile" accept=".json,application/json" hidden>
+</div>
+</section>
+
+<div class="sectionhead"><h2>Seguimientos</h2><span id="countLabel">0 resultados</span></div>
+<section class="leads" id="leadList"></section>
+<p class="note">Esta demo guarda datos temporalmente en este navegador. El repositorio público no contiene los leads que captures aquí. Para operación definitiva debe conectarse a la fuente privada comercial.</p>
+</main>
+
+<nav class="nav"><button class="active">HOY</button><button>LEADS</button><button>VEHÍCULOS</button><button>CONSULTA</button></nav>
+</div>
+
+<div class="modalback" id="modalBack"><div class="modal">
+<h2 id="modalTitle">Nuevo lead</h2><p>Registra la próxima acción desde el primer contacto.</p>
+<form id="leadForm" class="formgrid">
+<input type="hidden" id="leadId">
+<label>Nombre o alias<input id="name" required></label>
+<label>Canal<select id="leadChannel" required><option>WHATSAPP</option><option>MESSENGER</option></select></label>
+<label>Referencia de contacto<input id="contact" placeholder="Teléfono, usuario o referencia"></label>
+<label>Vehículo de interés<input id="vehicle" placeholder="Ej. Tiguan SE 2018"></label>
+<label>Etapa<select id="leadStage"><option>NUEVO</option><option>CONTACTADO</option><option>INFORMACION_ENVIADA</option><option>SEGUIMIENTO</option><option>CITA_PROGRAMADA</option><option>NEGOCIACION</option><option>GANADO</option><option>PERDIDO</option><option>PAUSADO</option></select></label>
+<label>Prioridad<select id="priority"><option>NORMAL</option><option>ALTA</option><option>BAJA</option></select></label>
+<label>Próximo seguimiento<input id="followup" type="datetime-local"></label>
+<label>Última interacción<input id="lastContact" type="datetime-local"></label>
+<label class="wide">Próxima acción<input id="nextAction" placeholder="Ej. enviar fotos y confirmar si agenda visita"></label>
+<label class="wide">Notas<textarea id="notes" placeholder="Contexto breve del seguimiento"></textarea></label>
+</form>
+<div class="modalactions"><button class="btn" id="cancelModal">CANCELAR</button><button class="btn primary" id="saveLead">GUARDAR</button></div>
+</div></div>
+
+<script>
+const KEY='afl_demo1_leads_v1';
+let leads=JSON.parse(localStorage.getItem(KEY)||'[]');
+let dateFilter='all';
+const $=id=>document.getElementById(id);
+const activeStages=new Set(['NUEVO','CONTACTADO','INFORMACION_ENVIADA','SEGUIMIENTO','CITA_PROGRAMADA','NEGOCIACION','PAUSADO']);
+function save(){localStorage.setItem(KEY,JSON.stringify(leads));render()}
+function dayKey(d){const x=new Date(d);return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')}
+function bucket(l){
+ if(!l.followup)return 'nodate';
+ const now=new Date(), f=new Date(l.followup);
+ if(f<now && dayKey(f)!==dayKey(now))return 'overdue';
+ if(dayKey(f)===dayKey(now))return 'today';
+ return f>now?'upcoming':'overdue'
+}
+function fmt(v){if(!v)return 'Sin fecha';return new Intl.DateTimeFormat('es-MX',{dateStyle:'medium',timeStyle:'short'}).format(new Date(v))}
+function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function render(){
+ const q=$('search').value.trim().toLowerCase(), ch=$('channel').value, st=$('stage').value;
+ const active=leads.filter(l=>activeStages.has(l.stage));
+ $('mAll').textContent=active.length;
+ $('mOver').textContent=active.filter(l=>bucket(l)==='overdue').length;
+ $('mToday').textContent=active.filter(l=>bucket(l)==='today').length;
+ $('mNext').textContent=active.filter(l=>bucket(l)==='upcoming').length;
+ let rows=leads.filter(l=>{
+   if(ch&&l.channel!==ch)return false;if(st&&l.stage!==st)return false;
+   if(dateFilter!=='all'&&bucket(l)!==dateFilter)return false;
+   const hay=(l.name+' '+l.vehicle+' '+l.nextAction+' '+l.contact).toLowerCase();
+   return !q||hay.includes(q)
+ });
+ const order={overdue:0,today:1,upcoming:2,nodate:3};
+ rows.sort((a,b)=>(order[bucket(a)]-order[bucket(b)])*-1 || new Date(a.followup||'2999-01-01')-new Date(b.followup||'2999-01-01'));
+ $('countLabel').textContent=rows.length+' resultado'+(rows.length===1?'':'s');
+ $('leadList').innerHTML=rows.length?rows.map(l=>{
+   const b=bucket(l), cls=b==='overdue'?'overdue':b==='today'?'today':'';
+   return `<article class="lead">
+    <div class="leadtop"><div><div class="leadname">${esc(l.name)}</div><div class="sub">${esc(l.vehicle||'Sin vehículo asociado')}</div></div><span class="tag ${l.channel==='WHATSAPP'?'wa':'msg'}">${esc(l.channel)}</span></div>
+    <div class="tags"><span class="tag">${esc(l.stage)}</span><span class="tag ${cls}">${b==='overdue'?'VENCIDO':b==='today'?'HOY':b==='upcoming'?'PRÓXIMO':'SIN FECHA'}</span><span class="tag">${esc(l.priority||'NORMAL')}</span></div>
+    <div class="next"><small>PRÓXIMA ACCIÓN · ${esc(fmt(l.followup))}</small><strong>${esc(l.nextAction||'Definir próximo paso')}</strong></div>
+    <div class="actions"><button class="btn ok" onclick="contacted('${l.id}')">CONTACTADO</button><button class="btn" onclick="editLead('${l.id}')">ABRIR</button></div>
+   </article>`
+ }).join(''):'<div class="empty">No hay leads en esta vista.</div>';
+}
+function openModal(l=null){
+ $('leadForm').reset();$('leadId').value=l?.id||'';$('modalTitle').textContent=l?'Editar lead':'Nuevo lead';
+ if(l){$('name').value=l.name||'';$('leadChannel').value=l.channel||'WHATSAPP';$('contact').value=l.contact||'';$('vehicle').value=l.vehicle||'';$('leadStage').value=l.stage||'NUEVO';$('priority').value=l.priority||'NORMAL';$('followup').value=l.followup||'';$('lastContact').value=l.lastContact||'';$('nextAction').value=l.nextAction||'';$('notes').value=l.notes||''}
+ $('modalBack').classList.add('open')
+}
+function editLead(id){openModal(leads.find(x=>x.id===id))}
+function contacted(id){
+ const l=leads.find(x=>x.id===id);if(!l)return;
+ l.lastContact=new Date().toISOString().slice(0,16);
+ if(l.stage==='NUEVO')l.stage='CONTACTADO';
+ if(confirm('¿Quieres reprogramar el próximo seguimiento?'))openModal(l);else save()
+}
+$('saveLead').onclick=()=>{
+ if(!$('name').value.trim()){alert('Falta nombre o alias');return}
+ const id=$('leadId').value||crypto.randomUUID(), old=leads.find(x=>x.id===id);
+ const obj={id,name:$('name').value.trim(),channel:$('leadChannel').value,contact:$('contact').value.trim(),vehicle:$('vehicle').value.trim(),stage:$('leadStage').value,priority:$('priority').value,followup:$('followup').value,lastContact:$('lastContact').value,nextAction:$('nextAction').value.trim(),notes:$('notes').value.trim(),created:old?.created||new Date().toISOString(),updated:new Date().toISOString()};
+ leads=old?leads.map(x=>x.id===id?obj:x):[obj,...leads];$('modalBack').classList.remove('open');save()
+};
+$('newLead').onclick=()=>openModal();$('cancelModal').onclick=()=>$('modalBack').classList.remove('open');
+$('modalBack').onclick=e=>{if(e.target===$('modalBack'))$('modalBack').classList.remove('open')};
+['search','channel','stage'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',render));
+document.querySelectorAll('[data-filterdate]').forEach(b=>b.onclick=()=>{dateFilter=b.dataset.filterdate;document.querySelectorAll('[data-filterdate]').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()});
+$('exportBtn').onclick=()=>{
+ const blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),leads},null,2)],{type:'application/json'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='afl-autos-leads-demo1.json';a.click();URL.revokeObjectURL(a.href)
+};
+$('importBtn').onclick=()=>$('importFile').click();
+$('importFile').onchange=async e=>{try{const j=JSON.parse(await e.target.files[0].text());if(!Array.isArray(j.leads))throw 0;if(confirm('Esto reemplazará los leads actuales de esta demo.')){leads=j.leads;save()}}catch{alert('JSON no válido')}e.target.value=''};
+window.editLead=editLead;window.contacted=contacted;render();
+</script>
+</body>
+</html>
