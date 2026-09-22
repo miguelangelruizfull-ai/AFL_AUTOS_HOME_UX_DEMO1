@@ -100,3 +100,26 @@ REPROGRAMACION_RAPIDA
 EXPORTACION_CALENDARIO_ICS
 NO_PRODUCTIVO
 ```
+
+
+## Siguiente fase — persistencia privada
+
+La evolución productiva no debe convertir este repositorio público, un JSON público ni `localStorage` en CRM.
+
+```text
+HOME UX
+→ CAPA PRIVADA AUTENTICADA
+→ FUENTE COMERCIAL PRIVADA
+→ OPERACION / SEGUIMIENTO
+→ EXPORTACION SANITIZADA
+→ APRENDIZAJE Y METRICAS
+```
+
+Contrato de frontera:
+- PII, referencias de contacto, conversaciones y notas identificables permanecen en almacenamiento privado autorizado;
+- el frontend público no precarga ni publica leads reales;
+- `localStorage` continúa siendo únicamente caché de Demo 1;
+- una integración productiva deberá sincronizar con la fuente privada vigente de `AFL_AUTOS_COMERCIAL`;
+- solo derivados sanitizados y revisados pueden alimentar aprendizaje/métricas en repositorios.
+
+Estado de esta fase: `DISEÑADA / NO_IMPLEMENTADA / REQUIERE_CAPA_PRIVADA_AUTENTICADA`.
