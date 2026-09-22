@@ -2,72 +2,44 @@
 
 Demo pública experimental de la interfaz operativa AFL AUTOS.
 
+## Estado actual
+
+```text
+DEMO_2
+HOME_OPERATIVA_UNIFICADA
+MOBILE_FIRST + DESKTOP
+LEADS + VEHICULOS + PRODUCCION + RECURSOS + ROOT + LAB
+NO_PRODUCTIVO
+```
+
 ## Objetivo
 
-Validar una Home UX móvil/escritorio que permita operar dos frentes desde una sola pantalla:
+Validar una sola interfaz para operar, sin depender de abrir múltiples HTML o recordar prompts/rutas para tareas cotidianas.
 
-1. estado y siguiente acción de vehículos;
-2. seguimiento comercial de leads provenientes de Messenger y WhatsApp.
+La navegación de Demo 2 incorpora:
 
-## Leads — Demo 1
+- Inicio / centro de trabajo;
+- Operaciones;
+- Respuestas y seguimiento de leads;
+- ficha de vehículo y editor JSON local;
+- retorno a producción manual;
+- Drive / GitHub como accesos configurables localmente;
+- ROOT Console como vista de coordinación;
+- AFL Autos Lab para pruebas.
 
-La interfaz permite:
+## Privacidad
 
-- registrar un lead;
-- identificar canal `MESSENGER` o `WHATSAPP`;
-- asociar vehículo de interés;
-- registrar etapa comercial;
-- programar fecha y hora del próximo seguimiento;
-- registrar la próxima acción;
-- distinguir vencidos, hoy y próximos;
-- marcar contacto realizado;
-- reprogramar;
-- filtrar por canal y etapa;
-- exportar/importar JSON para respaldo manual;
-- reprogramar seguimientos desde cada tarjeta;
-- usar atajos de fecha: hoy +2 h, mañana 10:00, +3 días y +7 días;
-- exportar un seguimiento individual a calendario mediante archivo `.ics`;
-- mostrar un resumen de agenda al abrir la Home.
+Este repositorio es público. Por diseño:
 
-### Estados comerciales
-
-```text
-NUEVO
-CONTACTADO
-INFORMACION_ENVIADA
-SEGUIMIENTO
-CITA_PROGRAMADA
-NEGOCIACION
-GANADO
-PERDIDO
-PAUSADO
-```
-
-### Prioridad visual
-
-```text
-VENCIDO
-→ HOY
-→ PROXIMO
-→ SIN_FECHA
-→ CERRADO
-```
-
-## Flujo
-
-```text
-NUEVO MENSAJE
-→ CREAR/IDENTIFICAR LEAD
-→ DEFINIR SIGUIENTE ACCION
-→ PROGRAMAR FECHA
-→ CONTACTAR
-→ REGISTRAR RESULTADO
-→ REPROGRAMAR O CERRAR
-```
+- no precarga PII real;
+- no contiene conversaciones reales;
+- no hardcodea enlaces privados de Drive;
+- no hardcodea repositorios privados;
+- no convierte `localStorage` en fuente de verdad;
+- los enlaces privados que el usuario configure desde la UI se guardan únicamente en el navegador;
+- la exportación de respaldo de Demo 2 no incluye los valores de esos enlaces privados, solo sus nombres configurados.
 
 ## Persistencia
-
-Demo 1 usa `localStorage` como cache temporal del navegador.
 
 ```text
 localStorage = CACHE_DEMO
@@ -75,51 +47,33 @@ localStorage = CACHE_DEMO
 FUENTE_DE_VERDAD
 ```
 
-Permite exportar/importar JSON. Una versión productiva deberá conectarse con la fuente privada comercial vigente.
+Demo 2 reutiliza la clave de leads de Demo 1 para no perder la prueba local previa y agrega almacenamiento local separado para vehículos demo, enlaces privados y retorno de producción.
 
-## Privacidad de esta prueba
-
-Miguel autorizó probar una superficie pública con información privada para esta Demo 1.
-
-Aun así, el repositorio no precarga PII real para evitar persistir accidentalmente nombres, teléfonos o conversaciones en GitHub. Los datos capturados desde la interfaz quedan en el navegador hasta que se exporten o eliminen.
-
-## Archivos
-
-- `index.html` — aplicación Demo 1.
-- `docs/LEADS_UX.md` — diseño funcional del seguimiento comercial.
-
-## Estado
+## Arquitectura UX
 
 ```text
-DEMO_1
-CRM_LIGERO
-MOBILE_FIRST
-MESSENGER + WHATSAPP
-PROGRAMACION_DE_SEGUIMIENTOS
-REPROGRAMACION_RAPIDA
-EXPORTACION_CALENDARIO_ICS
-NO_PRODUCTIVO
+HOME UX
+├─ INICIO
+├─ OPERACIONES
+├─ RESPUESTAS / LEADS
+├─ VEHICULOS
+├─ PRODUCCION MANUAL
+├─ DRIVE / GITHUB
+├─ ROOT CONSOLE
+└─ AFL AUTOS LAB
 ```
 
+La Home es interfaz; las fuentes de verdad siguen perteneciendo a los repositorios y almacenamientos autorizados de cada frente.
 
-## Siguiente fase — persistencia privada
-
-La evolución productiva no debe convertir este repositorio público, un JSON público ni `localStorage` en CRM.
+## Siguiente fase productiva
 
 ```text
 HOME UX
 → CAPA PRIVADA AUTENTICADA
 → FUENTE COMERCIAL PRIVADA
-→ OPERACION / SEGUIMIENTO
+→ FUENTES DE VEHICULOS / OPERACION
+→ ACCIONES CONTROLADAS
 → EXPORTACION SANITIZADA
-→ APRENDIZAJE Y METRICAS
 ```
 
-Contrato de frontera:
-- PII, referencias de contacto, conversaciones y notas identificables permanecen en almacenamiento privado autorizado;
-- el frontend público no precarga ni publica leads reales;
-- `localStorage` continúa siendo únicamente caché de Demo 1;
-- una integración productiva deberá sincronizar con la fuente privada vigente de `AFL_AUTOS_COMERCIAL`;
-- solo derivados sanitizados y revisados pueden alimentar aprendizaje/métricas en repositorios.
-
-Estado de esta fase: `DISEÑADA / NO_IMPLEMENTADA / REQUIERE_CAPA_PRIVADA_AUTENTICADA`.
+La integración productiva requiere autenticación y conectores o APIs autorizadas. No debe resolverse publicando datos privados en GitHub.
