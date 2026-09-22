@@ -2,177 +2,545 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0a0c0f">
-<title>AFL AUTOS · Leads Demo 1</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b0e">
+<title>AFL AUTOS · Operación UX Demo 2</title>
 <style>
-:root{color-scheme:dark;--bg:#0a0c0f;--panel:#11151a;--panel2:#171c22;--line:#2a313a;--text:#f5f7f8;--muted:#98a3ae;--ok:#66d38a;--warn:#e3b45e;--bad:#e47d7d;--blue:#84b7ff;--radius:18px}
-*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,select,textarea{font:inherit}button{cursor:pointer}.app{min-height:100dvh;padding-bottom:86px}.wrap{width:min(1180px,100%);margin:auto;padding:0 14px}
-.top{position:sticky;top:0;z-index:20;background:rgba(10,12,15,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.topin{height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.15em;font-weight:800}.brand strong{display:block;margin-top:2px;font-size:18px}
-.badge{font-size:10px;font-weight:900;border:1px solid var(--line);border-radius:999px;padding:7px 9px}
-.main{padding-top:16px}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.metric{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:13px;min-height:86px;text-align:left;color:var(--text)}
-.metric strong{font-size:24px;display:block}.metric span{font-size:11px;color:var(--muted);display:block;margin-top:5px}.metric.active{outline:1px solid #fff}.agenda{margin-top:10px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,#151a20,#11151a);padding:13px}.agenda strong{display:block;font-size:14px}.agenda span{display:block;color:var(--muted);font-size:11px;margin-top:5px;line-height:1.4}
-.toolbar{display:grid;gap:8px;margin:14px 0}.toolbar .row{display:grid;grid-template-columns:1fr;gap:8px}.field,select,input,textarea{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:13px;min-height:46px;padding:0 12px}
-textarea{padding:12px;min-height:88px;resize:vertical}.btn{border:1px solid var(--line);border-radius:13px;min-height:46px;padding:0 14px;font-weight:900;font-size:12px;background:var(--panel2);color:var(--text)}
-.btn.primary{background:#f2f4f5;color:#111;border-color:#f2f4f5}.btn.danger{color:#ffb1b1}.btn.ok{color:#aef0c2}.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:16px 0 8px}.sectionhead h2{font-size:17px;margin:0}.sectionhead span{color:var(--muted);font-size:11px}
-.leads{display:grid;gap:8px}.lead{border:1px solid var(--line);border-radius:17px;background:var(--panel);padding:14px}.leadtop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.leadname{font-size:15px;font-weight:900}.sub{font-size:11px;color:var(--muted);margin-top:4px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.tag{font-size:9px;font-weight:900;border:1px solid var(--line);border-radius:999px;padding:6px 7px}.tag.wa{color:#aef0c2}.tag.msg{color:#a9ceff}.tag.overdue{color:#ffaaaa;border-color:rgba(228,125,125,.45)}.tag.today{color:#f5d28c;border-color:rgba(227,180,94,.45)}
-.next{margin-top:11px;border-top:1px solid var(--line);padding-top:10px}.next small{color:var(--muted);font-size:10px}.next strong{display:block;font-size:13px;margin-top:3px;line-height:1.4}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:11px}.quickdates{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:7px}.quickdates button{min-height:40px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);color:var(--text);font-size:10px;font-weight:900}
-.empty{border:1px dashed var(--line);border-radius:17px;padding:28px;text-align:center;color:var(--muted);font-size:13px}
-.nav{position:fixed;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px 10px 10px;background:rgba(10,12,15,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);z-index:25}.nav button{border:0;border-radius:12px;min-height:52px;background:transparent;color:var(--muted);font-size:10px;font-weight:900}.nav button.active{background:var(--panel2);color:var(--text)}
-.modalback{position:fixed;inset:0;background:rgba(0,0,0,.68);display:none;align-items:flex-end;justify-content:center;padding:10px;z-index:50}.modalback.open{display:flex}.modal{width:min(720px,100%);max-height:92dvh;overflow:auto;background:#101419;border:1px solid var(--line);border-radius:22px;padding:16px}.modal h2{margin:0 0 4px;font-size:20px}.modal p{margin:0 0 14px;color:var(--muted);font-size:12px}.formgrid{display:grid;gap:9px}.formgrid label{font-size:11px;color:var(--muted);display:grid;gap:5px}.modalactions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.note{font-size:10px;color:var(--muted);line-height:1.5;margin:18px 2px}
-@media(min-width:720px){.metrics{grid-template-columns:repeat(4,1fr)}.toolbar .row{grid-template-columns:1fr 180px 180px auto}.leads{grid-template-columns:repeat(2,1fr)}.nav{left:50%;right:auto;transform:translateX(-50%);width:min(760px,calc(100% - 40px));border:1px solid var(--line);border-radius:18px 18px 0 0}.formgrid{grid-template-columns:1fr 1fr}.formgrid .wide{grid-column:1/-1}}
-@media(min-width:1050px){.wrap{padding:0 24px}.app{padding-bottom:32px}.nav{display:none}.leads{grid-template-columns:repeat(3,1fr)}}
+:root{
+  color-scheme:dark;
+  --bg:#090b0e;--panel:#11151a;--panel2:#171c22;--soft:#1c222a;--line:#29313a;
+  --text:#f5f7f8;--muted:#96a1ac;--ok:#62d38a;--warn:#e6b45c;--bad:#e47d7d;
+  --blue:#8abaff;--violet:#b49cff;--radius:18px;--shadow:0 18px 50px rgba(0,0,0,.24)
+}
+*{box-sizing:border-box}
+html{background:var(--bg);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.app{min-height:100dvh}
+.shell{width:min(1500px,100%);margin:auto}
+.top{
+  position:sticky;top:0;z-index:50;background:rgba(9,11,14,.92);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line)
+}
+.topin{height:68px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 14px}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.17em;font-weight:900}
+.brand strong{display:block;font-size:18px;margin-top:3px}
+.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:10px;font-weight:900}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.layout{display:grid;grid-template-columns:1fr;min-height:calc(100dvh - 68px)}
+.sidebar{
+  display:none;border-right:1px solid var(--line);padding:18px 12px;position:sticky;top:68px;height:calc(100dvh - 68px)
+}
+.sidegroup{display:grid;gap:5px}
+.sidelabel{font-size:9px;color:var(--muted);font-weight:900;letter-spacing:.13em;padding:12px 10px 6px}
+.navbtn{
+  width:100%;min-height:44px;border:1px solid transparent;border-radius:13px;background:transparent;color:var(--muted);
+  display:flex;align-items:center;justify-content:space-between;padding:0 11px;font-size:12px;font-weight:800;text-align:left
+}
+.navbtn span:first-child{display:flex;gap:10px;align-items:center}
+.navbtn.active{background:var(--panel2);border-color:var(--line);color:var(--text)}
+.navbtn .count{font-size:9px;border:1px solid var(--line);padding:3px 6px;border-radius:999px}
+.main{padding:14px 14px 96px;min-width:0}
+.view{display:none}.view.active{display:block}
+.hero{
+  border:1px solid var(--line);border-radius:24px;padding:18px;background:
+  radial-gradient(circle at 90% -20%,rgba(138,186,255,.16),transparent 34%),
+  linear-gradient(145deg,#151a20,#0f1318);
+  box-shadow:var(--shadow)
+}
+.eyebrow{font-size:9px;letter-spacing:.16em;color:var(--muted);font-weight:900}
+.hero h1{font-size:28px;line-height:1.02;margin:7px 0 8px}
+.hero p{margin:0;color:var(--muted);font-size:12px;line-height:1.55;max-width:720px}
+.heroactions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.btn{
+  min-height:44px;border:1px solid var(--line);border-radius:13px;background:var(--panel2);color:var(--text);
+  padding:0 13px;font-size:11px;font-weight:900
+}
+.btn.primary{background:#f2f4f5;color:#111;border-color:#f2f4f5}
+.btn.ok{color:#abefc0}.btn.warn{color:#f4d291}.btn.bad{color:#ffb4b4}.btn.ghost{background:transparent}
+.grid{display:grid;gap:10px;margin-top:12px}
+.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+.metric,.card{
+  border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:14px;min-width:0
+}
+.metric strong{display:block;font-size:25px}.metric span{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+.metric.warn strong{color:var(--warn)}.metric.bad strong{color:var(--bad)}.metric.ok strong{color:var(--ok)}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:22px 2px 9px}
+.sectionhead h2{font-size:17px;margin:0}.sectionhead p{margin:3px 0 0;color:var(--muted);font-size:10px}
+.sectionhead .tiny{color:var(--muted);font-size:10px}
+.modules{grid-template-columns:repeat(2,minmax(0,1fr))}
+.module{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:14px;text-align:left;color:var(--text);min-height:132px}
+.module .icon{font-size:18px}.module strong{display:block;margin-top:18px;font-size:13px}.module p{font-size:10px;color:var(--muted);line-height:1.4;margin:5px 0 0}
+.module:hover{border-color:#536171}
+.statusline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:11px;padding-top:11px;border-top:1px solid var(--line)}
+.statusline span{font-size:9px;color:var(--muted)}
+.status{font-size:8px;font-weight:900;border:1px solid var(--line);border-radius:999px;padding:5px 7px}
+.status.ok{color:var(--ok)}.status.warn{color:var(--warn)}.status.bad{color:var(--bad)}
+.split{display:grid;gap:10px}
+.toolbar{display:grid;gap:8px;margin-bottom:10px}
+.toolbarrow{display:grid;gap:8px}
+input,select,textarea{
+  width:100%;border:1px solid var(--line);border-radius:13px;background:var(--panel);color:var(--text);min-height:44px;padding:0 11px
+}
+textarea{padding:11px;min-height:92px;resize:vertical}
+.list{display:grid;gap:8px}
+.item{border:1px solid var(--line);border-radius:17px;background:var(--panel);padding:13px}
+.itemtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.item strong{font-size:14px}
+.sub{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.45}
+.tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
+.tag{border:1px solid var(--line);border-radius:999px;padding:5px 7px;font-size:8px;font-weight:900}
+.tag.ok{color:var(--ok)}.tag.warn{color:var(--warn)}.tag.bad{color:var(--bad)}.tag.blue{color:var(--blue)}
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+.empty{border:1px dashed var(--line);border-radius:17px;padding:28px;text-align:center;color:var(--muted);font-size:11px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.kv:last-child{border-bottom:0}.kv span{font-size:10px;color:var(--muted)}.kv strong{font-size:10px;text-align:right}
+.paneltitle{font-size:13px;margin:0 0 10px}
+.codebox{border:1px solid var(--line);background:#0c0f13;border-radius:14px;padding:11px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#cfd8e1;overflow:auto;white-space:pre-wrap}
+.notice{border:1px solid rgba(230,180,92,.25);background:rgba(230,180,92,.06);border-radius:14px;padding:11px;color:#d8c49a;font-size:10px;line-height:1.5}
+.formgrid{display:grid;gap:8px}
+.formgrid label{display:grid;gap:5px;color:var(--muted);font-size:10px}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.quick button{min-height:38px;border:1px solid var(--line);border-radius:11px;background:var(--panel2);color:var(--text);font-size:9px;font-weight:900}
+.vehiclecards{grid-template-columns:1fr}
+.vehiclehero{height:110px;border-radius:13px;background:linear-gradient(135deg,#222a33,#11161c);display:flex;align-items:center;justify-content:center;color:#596571;font-size:11px;border:1px solid #242c35}
+.vehiclemeta{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;margin-top:11px}
+.vehiclemeta small{color:var(--muted);font-size:9px}
+.stagebar{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:10px}
+.stage{height:5px;border-radius:99px;background:#2a3139}.stage.on{background:#dfe5ea}
+.resources{grid-template-columns:1fr}
+.resourcehead{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.resourcehead strong{font-size:13px}
+.linkfield{display:grid;grid-template-columns:1fr auto;gap:7px;margin-top:10px}
+.bottomnav{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:grid;grid-template-columns:repeat(5,1fr);gap:3px;
+  padding:7px 8px calc(7px + env(safe-area-inset-bottom));background:rgba(9,11,14,.96);backdrop-filter:blur(18px);border-top:1px solid var(--line)
+}
+.bottomnav button{border:0;background:transparent;color:var(--muted);border-radius:11px;min-height:50px;font-size:9px;font-weight:900}
+.bottomnav button.active{background:var(--panel2);color:var(--text)}
+.modalback{position:fixed;inset:0;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.68);padding:10px;z-index:90}
+.modalback.open{display:flex}
+.modal{width:min(760px,100%);max-height:92dvh;overflow:auto;background:#101419;border:1px solid var(--line);border-radius:22px;padding:15px}
+.modal h2{margin:0 0 4px;font-size:19px}.modal>p{margin:0 0 13px;color:var(--muted);font-size:10px}
+.modalactions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.desktopOnly{display:none}
+@media(min-width:760px){
+  .main{padding:18px 20px 96px}.metrics{grid-template-columns:repeat(4,1fr)}.modules{grid-template-columns:repeat(4,1fr)}
+  .toolbarrow{grid-template-columns:1.4fr 180px 180px auto}.split{grid-template-columns:minmax(0,1.6fr) minmax(280px,.8fr)}
+  .vehiclecards{grid-template-columns:repeat(2,1fr)}.resources{grid-template-columns:repeat(2,1fr)}
+  .formgrid{grid-template-columns:1fr 1fr}.formgrid .wide{grid-column:1/-1}.desktopOnly{display:block}
+}
+@media(min-width:1100px){
+  .layout{grid-template-columns:230px 1fr}.sidebar{display:block}.main{padding:22px 24px 34px}.bottomnav{display:none}
+  .modules{grid-template-columns:repeat(4,1fr)}.vehiclecards{grid-template-columns:repeat(3,1fr)}
+  .resources{grid-template-columns:repeat(3,1fr)}.hero h1{font-size:36px}
+}
 </style>
 </head>
 <body>
-<div class="app">
-<header class="top"><div class="wrap topin"><div class="brand"><small>AFL AUTOS / COMERCIAL</small><strong>Seguimiento de Leads</strong></div><span class="badge">DEMO 1 · LOCAL</span></div></header>
-<main class="wrap main">
-<section class="metrics">
-<button class="metric active" data-filterdate="all"><strong id="mAll">0</strong><span>Activos</span></button>
-<button class="metric" data-filterdate="overdue"><strong id="mOver">0</strong><span>Vencidos</span></button>
-<button class="metric" data-filterdate="today"><strong id="mToday">0</strong><span>Hoy</span></button>
-<button class="metric" data-filterdate="upcoming"><strong id="mNext">0</strong><span>Próximos</span></button>
-</section>
-<section class="agenda"><strong id="agendaTitle">Agenda de seguimiento</strong><span id="agendaSummary">Sin seguimientos programados.</span></section>
+<div class="app shell">
+<header class="top">
+  <div class="topin">
+    <div class="brand"><small>AFL AUTOS / HOME OPERATIVA</small><strong id="viewTitle">Centro de trabajo</strong></div>
+    <span class="pill"><span class="dot"></span> DEMO 2 · LOCAL</span>
+  </div>
+</header>
 
-<section class="toolbar">
-<div class="row">
-<input id="search" placeholder="Buscar nombre, vehículo o próxima acción">
-<select id="channel"><option value="">Todos los canales</option><option>WHATSAPP</option><option>MESSENGER</option></select>
-<select id="stage"><option value="">Todas las etapas</option><option>NUEVO</option><option>CONTACTADO</option><option>INFORMACION_ENVIADA</option><option>SEGUIMIENTO</option><option>CITA_PROGRAMADA</option><option>NEGOCIACION</option><option>GANADO</option><option>PERDIDO</option><option>PAUSADO</option></select>
-<button class="btn primary" id="newLead">+ LEAD</button>
-</div>
-<div class="row" style="grid-template-columns:1fr 1fr">
-<button class="btn" id="exportBtn">EXPORTAR JSON</button>
-<button class="btn" id="importBtn">IMPORTAR JSON</button>
-<input type="file" id="importFile" accept=".json,application/json" hidden>
-</div>
+<div class="layout">
+<aside class="sidebar">
+  <div class="sidegroup">
+    <div class="sidelabel">OPERACIÓN</div>
+    <button class="navbtn active" data-view="home"><span>⌂ Inicio</span></button>
+    <button class="navbtn" data-view="operations"><span>◫ Operaciones</span><span class="count">3</span></button>
+    <button class="navbtn" data-view="leads"><span>◎ Respuestas / Leads</span><span class="count" id="sideLeadCount">0</span></button>
+    <button class="navbtn" data-view="vehicles"><span>◇ Vehículos</span></button>
+    <button class="navbtn" data-view="production"><span>▶ Producción</span></button>
+    <div class="sidelabel">SISTEMA</div>
+    <button class="navbtn" data-view="resources"><span>↗ Drive / GitHub</span></button>
+    <button class="navbtn" data-view="root"><span>⌘ ROOT Console</span></button>
+    <button class="navbtn" data-view="lab"><span>✦ AFL Autos Lab</span></button>
+  </div>
+</aside>
+
+<main class="main">
+<section class="view active" id="view-home">
+  <div class="hero">
+    <div class="eyebrow">AFL AUTOS · OPERACIÓN UNIFICADA</div>
+    <h1>Todo lo que necesitas operar, en una sola pantalla.</h1>
+    <p>Vehículos, respuestas, seguimiento, producción, atributos, recursos y accesos de coordinación. Esta demo usa datos locales y no publica PII ni enlaces privados.</p>
+    <div class="heroactions">
+      <button class="btn primary" data-go="leads">+ NUEVO LEAD</button>
+      <button class="btn" data-go="vehicles">ABRIR VEHÍCULOS</button>
+      <button class="btn" data-go="production">PRODUCCIÓN MANUAL</button>
+    </div>
+  </div>
+
+  <div class="grid metrics">
+    <div class="metric"><strong id="homeLeads">0</strong><span>Leads activos</span></div>
+    <div class="metric bad"><strong id="homeOverdue">0</strong><span>Seguimientos vencidos</span></div>
+    <div class="metric warn"><strong id="homeToday">0</strong><span>Seguimientos hoy</span></div>
+    <div class="metric ok"><strong id="homeVehicles">3</strong><span>Vehículos demo</span></div>
+  </div>
+
+  <div class="sectionhead"><div><h2>Accesos operativos</h2><p>Entra por tarea, no por archivo.</p></div></div>
+  <div class="grid modules">
+    <button class="module" data-go="operations"><span class="icon">◫</span><strong>Operaciones</strong><p>Estado, pendientes y siguiente acción.</p><div class="statusline"><span>3 frentes demo</span><span class="status ok">ACTIVO</span></div></button>
+    <button class="module" data-go="leads"><span class="icon">◎</span><strong>Respuestas / Leads</strong><p>WhatsApp, Messenger y seguimientos.</p><div class="statusline"><span>Agenda local</span><span class="status ok">LISTO</span></div></button>
+    <button class="module" data-go="vehicles"><span class="icon">◇</span><strong>Ficha de vehículo</strong><p>Atributos y JSON editable.</p><div class="statusline"><span>Cache local</span><span class="status warn">DEMO</span></div></button>
+    <button class="module" data-go="production"><span class="icon">▶</span><strong>Producción manual</strong><p>Regresa un vehículo a etapa operativa.</p><div class="statusline"><span>Sin ejecución remota</span><span class="status warn">CONTROL</span></div></button>
+    <button class="module" data-go="resources"><span class="icon">↗</span><strong>Drive / GitHub</strong><p>Accesos configurables solo en tu navegador.</p><div class="statusline"><span>No se publican URLs</span><span class="status ok">SEGURO</span></div></button>
+    <button class="module" data-go="root"><span class="icon">⌘</span><strong>ROOT Console</strong><p>Estado del ecosistema y rutas de coordinación.</p><div class="statusline"><span>Vista demostrativa</span><span class="status warn">LOCAL</span></div></button>
+    <button class="module" data-go="lab"><span class="icon">✦</span><strong>AFL Autos Lab</strong><p>Pruebas, contenido y experimentos controlados.</p><div class="statusline"><span>Entorno experimental</span><span class="status warn">LAB</span></div></button>
+    <button class="module" id="exportAll"><span class="icon">⇩</span><strong>Respaldo local</strong><p>Exporta la configuración y datos demo en JSON.</p><div class="statusline"><span>Descarga manual</span><span class="status ok">DISPONIBLE</span></div></button>
+  </div>
 </section>
 
-<div class="sectionhead"><h2>Seguimientos</h2><span id="countLabel">0 resultados</span></div>
-<section class="leads" id="leadList"></section>
-<p class="note">Esta demo guarda datos temporalmente en este navegador. El repositorio público no contiene los leads que captures aquí. Para operación definitiva debe conectarse a la fuente privada comercial.</p>
+<section class="view" id="view-operations">
+  <div class="sectionhead"><div><h2>Operaciones</h2><p>Qué está detenido y cuál es el siguiente movimiento.</p></div><button class="btn" data-go="home">VOLVER</button></div>
+  <div class="split">
+    <div class="list">
+      <article class="item"><div class="itemtop"><div><strong>Seguimiento comercial</strong><div class="sub">Revisar vencidos y contactos programados antes de iniciar tareas nuevas.</div></div><span class="tag bad">PRIORIDAD</span></div><div class="actions"><button class="btn" data-go="leads">ABRIR LEADS</button><button class="btn" data-go="home">HOME</button></div></article>
+      <article class="item"><div class="itemtop"><div><strong>Vehículos</strong><div class="sub">Validar ficha, atributos y estado antes de producir o responder.</div></div><span class="tag blue">CONTROL</span></div><div class="actions"><button class="btn" data-go="vehicles">ABRIR FICHAS</button><button class="btn" data-go="production">PRODUCCIÓN</button></div></article>
+      <article class="item"><div class="itemtop"><div><strong>Recursos</strong><div class="sub">Drive y GitHub se mantienen fuera del código público; se configuran localmente.</div></div><span class="tag ok">PRIVACIDAD</span></div><div class="actions"><button class="btn" data-go="resources">ABRIR RECURSOS</button><button class="btn" data-go="root">ROOT</button></div></article>
+    </div>
+    <aside class="card">
+      <h3 class="paneltitle">Regla operativa</h3>
+      <div class="codebox">ENTRADA
+→ IDENTIFICAR VEHÍCULO / LEAD
+→ VER FUENTE VIGENTE
+→ EJECUTAR ETAPA
+→ REGISTRAR RESULTADO
+→ DEFINIR SIGUIENTE ACCIÓN</div>
+    </aside>
+  </div>
+</section>
+
+<section class="view" id="view-leads">
+  <div class="sectionhead"><div><h2>Respuestas y seguimiento</h2><p>Messenger + WhatsApp. Los datos quedan en este navegador.</p></div><button class="btn primary" id="newLead">+ LEAD</button></div>
+  <div class="grid metrics">
+    <button class="metric" data-datefilter="all"><strong id="mAll">0</strong><span>Activos</span></button>
+    <button class="metric bad" data-datefilter="overdue"><strong id="mOver">0</strong><span>Vencidos</span></button>
+    <button class="metric warn" data-datefilter="today"><strong id="mToday">0</strong><span>Hoy</span></button>
+    <button class="metric" data-datefilter="upcoming"><strong id="mNext">0</strong><span>Próximos</span></button>
+  </div>
+  <div class="toolbar" style="margin-top:12px">
+    <div class="toolbarrow">
+      <input id="leadSearch" placeholder="Buscar nombre, vehículo o próxima acción">
+      <select id="leadChannel"><option value="">Todos los canales</option><option>WHATSAPP</option><option>MESSENGER</option></select>
+      <select id="leadStage"><option value="">Todas las etapas</option><option>NUEVO</option><option>CONTACTADO</option><option>INFORMACION_ENVIADA</option><option>SEGUIMIENTO</option><option>CITA_PROGRAMADA</option><option>NEGOCIACION</option><option>GANADO</option><option>PERDIDO</option><option>PAUSADO</option></select>
+      <button class="btn" id="leadExport">EXPORTAR</button>
+    </div>
+  </div>
+  <div class="split">
+    <div class="list" id="leadList"></div>
+    <aside class="card">
+      <h3 class="paneltitle">Agenda</h3>
+      <div class="kv"><span>Vencidos</span><strong id="agendaOver">0</strong></div>
+      <div class="kv"><span>Hoy</span><strong id="agendaToday">0</strong></div>
+      <div class="kv"><span>Próximo</span><strong id="agendaNext">Sin fecha</strong></div>
+      <div class="notice" style="margin-top:12px">Demo pública: no precarga nombres, teléfonos ni conversaciones. La versión productiva debe sincronizar con almacenamiento privado autenticado.</div>
+    </aside>
+  </div>
+</section>
+
+<section class="view" id="view-vehicles">
+  <div class="sectionhead"><div><h2>Vehículos</h2><p>Vista de operación y editor local de atributos.</p></div><button class="btn primary" id="newVehicle">+ VEHÍCULO DEMO</button></div>
+  <div class="grid vehiclecards" id="vehicleList"></div>
+</section>
+
+<section class="view" id="view-production">
+  <div class="sectionhead"><div><h2>Producción manual</h2><p>Selecciona un vehículo y una etapa. En Demo 2 solo registra intención local.</p></div></div>
+  <div class="split">
+    <div class="card">
+      <div class="formgrid">
+        <label>Vehículo<select id="prodVehicle"></select></label>
+        <label>Etapa<select id="prodStage"><option>PLAN_CAPTURA</option><option>SELECCION</option><option>RETOQUE</option><option>PIEZA_FEED</option><option>REEL_TIKTOK</option><option>WHATSAPP</option><option>REVISION</option></select></label>
+        <label class="wide">Objetivo<textarea id="prodNote" placeholder="Ej. volver a selección con nuevas fotografías y conservar originales."></textarea></label>
+      </div>
+      <div class="heroactions"><button class="btn primary" id="registerProduction">REGISTRAR RETORNO</button><button class="btn" id="clearProduction">LIMPIAR</button></div>
+      <div class="notice" style="margin-top:12px">No ejecuta prompts, no modifica Drive y no cambia repositorios. Solo crea un registro local para validar la UX antes de conectar una capa autenticada.</div>
+    </div>
+    <aside class="card">
+      <h3 class="paneltitle">Último retorno</h3>
+      <div class="codebox" id="prodLog">Sin registros.</div>
+    </aside>
+  </div>
+</section>
+
+<section class="view" id="view-resources">
+  <div class="sectionhead"><div><h2>Drive / GitHub</h2><p>Accesos privados configurables en localStorage; no se escriben en el repositorio.</p></div></div>
+  <div class="grid resources">
+    <article class="card"><div class="resourcehead"><strong>Drive · Vehículos</strong><span class="tag ok">LOCAL</span></div><div class="sub">Carpeta principal o estructura vigente.</div><div class="linkfield"><input id="driveVehicles" placeholder="Pega enlace privado en este navegador"><button class="btn" data-save-link="driveVehicles">GUARDAR</button></div><div class="actions"><button class="btn" data-open-link="driveVehicles">ABRIR</button><button class="btn bad" data-clear-link="driveVehicles">BORRAR</button></div></article>
+    <article class="card"><div class="resourcehead"><strong>Drive · Comercial</strong><span class="tag ok">LOCAL</span></div><div class="sub">Fuente privada de leads o seguimiento.</div><div class="linkfield"><input id="driveCommercial" placeholder="Pega enlace privado en este navegador"><button class="btn" data-save-link="driveCommercial">GUARDAR</button></div><div class="actions"><button class="btn" data-open-link="driveCommercial">ABRIR</button><button class="btn bad" data-clear-link="driveCommercial">BORRAR</button></div></article>
+    <article class="card"><div class="resourcehead"><strong>GitHub · Operación</strong><span class="tag warn">CONFIG</span></div><div class="sub">Repositorio autorizado para operación.</div><div class="linkfield"><input id="githubOperation" placeholder="Pega URL autorizada"><button class="btn" data-save-link="githubOperation">GUARDAR</button></div><div class="actions"><button class="btn" data-open-link="githubOperation">ABRIR</button><button class="btn bad" data-clear-link="githubOperation">BORRAR</button></div></article>
+    <article class="card"><div class="resourcehead"><strong>GitHub · Vehículos</strong><span class="tag warn">CONFIG</span></div><div class="sub">Repositorio dueño de expedientes.</div><div class="linkfield"><input id="githubVehicles" placeholder="Pega URL autorizada"><button class="btn" data-save-link="githubVehicles">GUARDAR</button></div><div class="actions"><button class="btn" data-open-link="githubVehicles">ABRIR</button><button class="btn bad" data-clear-link="githubVehicles">BORRAR</button></div></article>
+    <article class="card"><div class="resourcehead"><strong>ROOT Console</strong><span class="tag warn">CONFIG</span></div><div class="sub">Superficie de coordinación autorizada.</div><div class="linkfield"><input id="rootConsoleLink" placeholder="Pega URL de consola"><button class="btn" data-save-link="rootConsoleLink">GUARDAR</button></div><div class="actions"><button class="btn" data-open-link="rootConsoleLink">ABRIR</button><button class="btn bad" data-clear-link="rootConsoleLink">BORRAR</button></div></article>
+    <article class="card"><div class="resourcehead"><strong>AFL Autos Lab</strong><span class="tag warn">CONFIG</span></div><div class="sub">Entorno experimental.</div><div class="linkfield"><input id="labLink" placeholder="Pega URL autorizada"><button class="btn" data-save-link="labLink">GUARDAR</button></div><div class="actions"><button class="btn" data-open-link="labLink">ABRIR</button><button class="btn bad" data-clear-link="labLink">BORRAR</button></div></article>
+  </div>
+</section>
+
+<section class="view" id="view-root">
+  <div class="sectionhead"><div><h2>ROOT Console</h2><p>Resumen visual de coordinación. No reemplaza fuentes canónicas.</p></div></div>
+  <div class="split">
+    <div class="card">
+      <h3 class="paneltitle">Mapa operativo</h3>
+      <div class="codebox">MIGUEL
+↓
+ROOT_ECOSISTEMA
+↓
+AFL AUTOS
+├─ OPERACIÓN
+├─ COMERCIAL
+├─ VEHÍCULOS
+├─ CONTENT SYSTEM
+├─ PLATFORM
+└─ LAB
+
+HOME UX = INTERFAZ
+NO = FUENTE DE VERDAD</div>
+    </div>
+    <aside class="card">
+      <h3 class="paneltitle">Gates</h3>
+      <div class="kv"><span>PII en repositorio público</span><strong>NO</strong></div>
+      <div class="kv"><span>Enlaces privados hardcodeados</span><strong>NO</strong></div>
+      <div class="kv"><span>localStorage</span><strong>CACHE</strong></div>
+      <div class="kv"><span>JSON sanitizado</span><strong>SÍ</strong></div>
+      <div class="kv"><span>Producción automática</span><strong>NO EN DEMO</strong></div>
+    </aside>
+  </div>
+</section>
+
+<section class="view" id="view-lab">
+  <div class="hero">
+    <div class="eyebrow">AFL AUTOS LAB</div>
+    <h1>Experimentar sin romper operación.</h1>
+    <p>Zona separada para probar contenido, UX, prompts, mediciones y nuevas funciones antes de convertirlas en flujo operativo.</p>
+    <div class="heroactions"><button class="btn" data-go="production">PROBAR PRODUCCIÓN</button><button class="btn" data-go="resources">RECURSOS</button></div>
+  </div>
+  <div class="grid modules">
+    <div class="module"><span class="icon">◌</span><strong>Contenido</strong><p>Conceptos, piezas, portadas y formatos.</p><div class="statusline"><span>Sandbox</span><span class="status warn">LAB</span></div></div>
+    <div class="module"><span class="icon">◫</span><strong>UX</strong><p>Pruebas de navegación móvil y escritorio.</p><div class="statusline"><span>Demo 2</span><span class="status ok">ACTUAL</span></div></div>
+    <div class="module"><span class="icon">⌁</span><strong>Métricas</strong><p>Solo derivados sanitizados y datos de prueba.</p><div class="statusline"><span>Sin RAW</span><span class="status ok">CONTROL</span></div></div>
+    <div class="module"><span class="icon">⚙</span><strong>Automatización</strong><p>Reservado para una capa autenticada futura.</p><div class="statusline"><span>No conectado</span><span class="status warn">FUTURO</span></div></div>
+  </div>
+</section>
 </main>
-
-<nav class="nav"><button class="active">HOY</button><button>LEADS</button><button>VEHÍCULOS</button><button>CONSULTA</button></nav>
 </div>
 
-<div class="modalback" id="modalBack"><div class="modal">
-<h2 id="modalTitle">Nuevo lead</h2><p>Registra la próxima acción desde el primer contacto.</p>
-<form id="leadForm" class="formgrid">
-<input type="hidden" id="leadId">
-<label>Nombre o alias<input id="name" required></label>
-<label>Canal<select id="leadChannel" required><option>WHATSAPP</option><option>MESSENGER</option></select></label>
-<label>Referencia de contacto<input id="contact" placeholder="Teléfono, usuario o referencia"></label>
-<label>Vehículo de interés<input id="vehicle" placeholder="Ej. Tiguan SE 2018"></label>
-<label>Etapa<select id="leadStage"><option>NUEVO</option><option>CONTACTADO</option><option>INFORMACION_ENVIADA</option><option>SEGUIMIENTO</option><option>CITA_PROGRAMADA</option><option>NEGOCIACION</option><option>GANADO</option><option>PERDIDO</option><option>PAUSADO</option></select></label>
-<label>Prioridad<select id="priority"><option>NORMAL</option><option>ALTA</option><option>BAJA</option></select></label>
-<label>Próximo seguimiento<input id="followup" type="datetime-local"><div class="quickdates"><button type="button" data-quick="today">HOY +2H</button><button type="button" data-quick="tomorrow">MAÑANA 10:00</button><button type="button" data-quick="3days">+3 DÍAS</button><button type="button" data-quick="7days">+7 DÍAS</button></div></label>
-<label>Última interacción<input id="lastContact" type="datetime-local"></label>
-<label class="wide">Próxima acción<input id="nextAction" placeholder="Ej. enviar fotos y confirmar si agenda visita"></label>
-<label class="wide">Notas<textarea id="notes" placeholder="Contexto breve del seguimiento"></textarea></label>
-</form>
-<div class="modalactions"><button class="btn" id="cancelModal">CANCELAR</button><button class="btn primary" id="saveLead">GUARDAR</button></div>
-</div></div>
+<nav class="bottomnav">
+  <button class="active" data-view="home">INICIO</button>
+  <button data-view="leads">LEADS</button>
+  <button data-view="vehicles">AUTOS</button>
+  <button data-view="production">PRODUCIR</button>
+  <button data-view="resources">MÁS</button>
+</nav>
+</div>
+
+<div class="modalback" id="leadModal">
+  <div class="modal">
+    <h2 id="leadModalTitle">Nuevo lead</h2><p>Define la siguiente acción desde el primer contacto.</p>
+    <div class="formgrid">
+      <input type="hidden" id="leadId">
+      <label>Nombre o alias<input id="name"></label>
+      <label>Canal<select id="channel"><option>WHATSAPP</option><option>MESSENGER</option></select></label>
+      <label>Referencia de contacto<input id="contact" placeholder="Solo para esta demo local"></label>
+      <label>Vehículo<input id="vehicle" placeholder="Ej. Tiguan SE 2018"></label>
+      <label>Etapa<select id="stage"><option>NUEVO</option><option>CONTACTADO</option><option>INFORMACION_ENVIADA</option><option>SEGUIMIENTO</option><option>CITA_PROGRAMADA</option><option>NEGOCIACION</option><option>GANADO</option><option>PERDIDO</option><option>PAUSADO</option></select></label>
+      <label>Prioridad<select id="priority"><option>NORMAL</option><option>ALTA</option><option>BAJA</option></select></label>
+      <label>Próximo seguimiento<input id="followup" type="datetime-local"><div class="quick"><button type="button" data-quick="today">HOY +2H</button><button type="button" data-quick="tomorrow">MAÑANA 10:00</button><button type="button" data-quick="3days">+3 DÍAS</button><button type="button" data-quick="7days">+7 DÍAS</button></div></label>
+      <label>Última interacción<input id="lastContact" type="datetime-local"></label>
+      <label class="wide">Próxima acción<input id="nextAction" placeholder="Ej. enviar fotos y confirmar visita"></label>
+      <label class="wide">Notas<textarea id="notes"></textarea></label>
+    </div>
+    <div class="modalactions"><button class="btn" id="cancelLead">CANCELAR</button><button class="btn primary" id="saveLead">GUARDAR</button></div>
+  </div>
+</div>
+
+<div class="modalback" id="vehicleModal">
+  <div class="modal">
+    <h2 id="vehicleModalTitle">Editar vehículo</h2><p>Campos de Demo 2. Se guardan únicamente en el navegador.</p>
+    <div class="formgrid">
+      <input type="hidden" id="vehicleId">
+      <label>Nombre<input id="vName" placeholder="Marca Modelo Año"></label>
+      <label>Código<input id="vCode" placeholder="AFL-DEMO-001"></label>
+      <label>Estado<select id="vStatus"><option>PENDIENTE_REVISION</option><option>LISTO_PARA_RESPUESTAS</option><option>CAPTURA_PENDIENTE</option><option>PRODUCCION</option><option>PUBLICADO</option></select></label>
+      <label>Precio demo<input id="vPrice" placeholder="$---"></label>
+      <label class="wide">Atributos JSON<textarea id="vJson" class="codebox" placeholder='{"motor":"","transmision":"","traccion":""}'></textarea></label>
+    </div>
+    <div class="modalactions"><button class="btn" id="cancelVehicle">CANCELAR</button><button class="btn primary" id="saveVehicle">GUARDAR</button></div>
+  </div>
+</div>
 
 <script>
-const KEY='afl_demo1_leads_v1';
-let leads=JSON.parse(localStorage.getItem(KEY)||'[]');
-let dateFilter='all';
+const LEADS_KEY='afl_demo1_leads_v1';
+const VEHICLES_KEY='afl_demo2_vehicles_v1';
+const LINKS_KEY='afl_demo2_private_links_v1';
+const PROD_KEY='afl_demo2_production_v1';
+
 const $=id=>document.getElementById(id);
 const activeStages=new Set(['NUEVO','CONTACTADO','INFORMACION_ENVIADA','SEGUIMIENTO','CITA_PROGRAMADA','NEGOCIACION','PAUSADO']);
-function save(){localStorage.setItem(KEY,JSON.stringify(leads));render()}
+let leads=JSON.parse(localStorage.getItem(LEADS_KEY)||'[]');
+let vehicles=JSON.parse(localStorage.getItem(VEHICLES_KEY)||'null')||[
+  {id:'v1',name:'Volkswagen Tiguan SE 2018',code:'AFL-DEMO-TIGUAN',status:'CAPTURA_PENDIENTE',price:'',attrs:{motor:'2.0 TSI',traccion:'4MOTION'}},
+  {id:'v2',name:'Jeep Wrangler 2017',code:'AFL-DEMO-WRANGLER',status:'PENDIENTE_REVISION',price:'',attrs:{}},
+  {id:'v3',name:'Ford F-150 2011',code:'AFL-DEMO-F150',status:'LISTO_PARA_RESPUESTAS',price:'',attrs:{}}
+];
+let privateLinks=JSON.parse(localStorage.getItem(LINKS_KEY)||'{}');
+let dateFilter='all';
+
+function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 function dayKey(d){const x=new Date(d);return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')}
 function bucket(l){
- if(!l.followup)return 'nodate';
- const now=new Date(), f=new Date(l.followup);
- if(f<now && dayKey(f)!==dayKey(now))return 'overdue';
- if(dayKey(f)===dayKey(now))return 'today';
- return f>now?'upcoming':'overdue'
+  if(!l.followup)return 'nodate';
+  const now=new Date(),f=new Date(l.followup);
+  if(f<now&&dayKey(f)!==dayKey(now))return 'overdue';
+  if(dayKey(f)===dayKey(now))return 'today';
+  return f>now?'upcoming':'overdue';
 }
-function fmt(v){if(!v)return 'Sin fecha';return new Intl.DateTimeFormat('es-MX',{dateStyle:'medium',timeStyle:'short'}).format(new Date(v))}
-function esc(s=''){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-function render(){
- const q=$('search').value.trim().toLowerCase(), ch=$('channel').value, st=$('stage').value;
- const active=leads.filter(l=>activeStages.has(l.stage));
- $('mAll').textContent=active.length;
- $('mOver').textContent=active.filter(l=>bucket(l)==='overdue').length;
- $('mToday').textContent=active.filter(l=>bucket(l)==='today').length;
- $('mNext').textContent=active.filter(l=>bucket(l)==='upcoming').length;
- const overdue=active.filter(l=>bucket(l)==='overdue').length, today=active.filter(l=>bucket(l)==='today').length;
- const nextLead=active.filter(l=>l.followup).sort((a,b)=>new Date(a.followup)-new Date(b.followup))[0];
- $('agendaTitle').textContent=overdue?overdue+' seguimiento'+(overdue===1?' vencido':'s vencidos'):today?today+' seguimiento'+(today===1?' para hoy':'s para hoy'):'Agenda al día';
- $('agendaSummary').textContent=overdue?'Prioridad: atender vencidos antes de programar nuevos contactos.':today?'Tienes contactos programados hoy.':'Próximo: '+(nextLead?fmt(nextLead.followup)+' · '+nextLead.name:'sin seguimientos programados');
- let rows=leads.filter(l=>{
-   if(ch&&l.channel!==ch)return false;if(st&&l.stage!==st)return false;
-   if(dateFilter!=='all'&&bucket(l)!==dateFilter)return false;
-   const hay=(l.name+' '+l.vehicle+' '+l.nextAction+' '+l.contact).toLowerCase();
-   return !q||hay.includes(q)
- });
- const order={overdue:0,today:1,upcoming:2,nodate:3};
- rows.sort((a,b)=>(order[bucket(a)]-order[bucket(b)])*-1 || new Date(a.followup||'2999-01-01')-new Date(b.followup||'2999-01-01'));
- $('countLabel').textContent=rows.length+' resultado'+(rows.length===1?'':'s');
- $('leadList').innerHTML=rows.length?rows.map(l=>{
-   const b=bucket(l), cls=b==='overdue'?'overdue':b==='today'?'today':'';
-   return `<article class="lead">
-    <div class="leadtop"><div><div class="leadname">${esc(l.name)}</div><div class="sub">${esc(l.vehicle||'Sin vehículo asociado')}</div></div><span class="tag ${l.channel==='WHATSAPP'?'wa':'msg'}">${esc(l.channel)}</span></div>
-    <div class="tags"><span class="tag">${esc(l.stage)}</span><span class="tag ${cls}">${b==='overdue'?'VENCIDO':b==='today'?'HOY':b==='upcoming'?'PRÓXIMO':'SIN FECHA'}</span><span class="tag">${esc(l.priority||'NORMAL')}</span></div>
-    <div class="next"><small>PRÓXIMA ACCIÓN · ${esc(fmt(l.followup))}</small><strong>${esc(l.nextAction||'Definir próximo paso')}</strong></div>
-    <div class="actions"><button class="btn ok" onclick="contacted('${l.id}')">CONTACTADO</button><button class="btn" onclick="reschedule('${l.id}')">REPROGRAMAR</button><button class="btn" onclick="exportICS('${l.id}')">CALENDARIO</button></div><div class="actions" style="grid-template-columns:1fr"><button class="btn" onclick="editLead('${l.id}')">ABRIR DETALLE</button></div>
-   </article>`
- }).join(''):'<div class="empty">No hay leads en esta vista.</div>';
+function fmt(v){
+  if(!v)return 'Sin fecha';
+  try{return new Intl.DateTimeFormat('es-MX',{dateStyle:'medium',timeStyle:'short'}).format(new Date(v))}catch{return v}
 }
-function openModal(l=null){
- $('leadForm').reset();$('leadId').value=l?.id||'';$('modalTitle').textContent=l?'Editar lead':'Nuevo lead';
- if(l){$('name').value=l.name||'';$('leadChannel').value=l.channel||'WHATSAPP';$('contact').value=l.contact||'';$('vehicle').value=l.vehicle||'';$('leadStage').value=l.stage||'NUEVO';$('priority').value=l.priority||'NORMAL';$('followup').value=l.followup||'';$('lastContact').value=l.lastContact||'';$('nextAction').value=l.nextAction||'';$('notes').value=l.notes||''}
- $('modalBack').classList.add('open')
+function go(view){
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  const target=$('view-'+view); if(target)target.classList.add('active');
+  document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x.dataset.view===view));
+  const titles={home:'Centro de trabajo',operations:'Operaciones',leads:'Respuestas / Leads',vehicles:'Vehículos',production:'Producción manual',resources:'Drive / GitHub',root:'ROOT Console',lab:'AFL Autos Lab'};
+  $('viewTitle').textContent=titles[view]||'AFL AUTOS';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-function editLead(id){openModal(leads.find(x=>x.id===id))}
-function reschedule(id){const l=leads.find(x=>x.id===id);if(!l)return;openModal(l);setTimeout(()=>$('followup').focus(),50)}
-function localValue(d){const z=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())+'T'+z(d.getHours())+':'+z(d.getMinutes())}
-function quickSchedule(mode){
- const d=new Date();
- if(mode==='today')d.setHours(d.getHours()+2,0,0,0);
- if(mode==='tomorrow'){d.setDate(d.getDate()+1);d.setHours(10,0,0,0)}
- if(mode==='3days'){d.setDate(d.getDate()+3);d.setHours(10,0,0,0)}
- if(mode==='7days'){d.setDate(d.getDate()+7);d.setHours(10,0,0,0)}
- $('followup').value=localValue(d)
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.view)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{
+  go(b.dataset.go);
+  if(b.dataset.go==='leads'&&b.classList.contains('primary'))setTimeout(()=>openLead(),100);
+}));
+
+function saveLeads(){localStorage.setItem(LEADS_KEY,JSON.stringify(leads));renderLeads();renderHome()}
+function saveVehicles(){localStorage.setItem(VEHICLES_KEY,JSON.stringify(vehicles));renderVehicles();renderHome();renderProductionVehicles()}
+function renderHome(){
+  const active=leads.filter(l=>activeStages.has(l.stage));
+  $('homeLeads').textContent=active.length;
+  $('homeOverdue').textContent=active.filter(l=>bucket(l)==='overdue').length;
+  $('homeToday').textContent=active.filter(l=>bucket(l)==='today').length;
+  $('homeVehicles').textContent=vehicles.length;
+  $('sideLeadCount').textContent=active.length;
 }
-function icsEsc(v=''){return String(v).replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/,/g,'\\,').replace(/;/g,'\\;')}
-function exportICS(id){
- const l=leads.find(x=>x.id===id);if(!l||!l.followup){alert('Este lead no tiene fecha de seguimiento.');return}
- const start=new Date(l.followup), end=new Date(start.getTime()+30*60000);
- const stamp=d=>d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
- const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//AFL AUTOS//Seguimiento Leads//ES','BEGIN:VEVENT','UID:'+l.id+'@afl-autos-demo','DTSTAMP:'+stamp(new Date()),'DTSTART:'+stamp(start),'DTEND:'+stamp(end),'SUMMARY:'+icsEsc('Seguimiento AFL AUTOS · '+l.name),'DESCRIPTION:'+icsEsc((l.vehicle||'')+' | '+(l.nextAction||'Seguimiento comercial')),'END:VEVENT','END:VCALENDAR'].join('\r\n');
- const blob=new Blob([ics],{type:'text/calendar;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='seguimiento-'+(l.name||'lead').replace(/[^a-z0-9]+/gi,'-').toLowerCase()+'.ics';a.click();URL.revokeObjectURL(a.href)
+function renderLeads(){
+  const q=$('leadSearch').value.trim().toLowerCase(),ch=$('leadChannel').value,st=$('leadStage').value;
+  const active=leads.filter(l=>activeStages.has(l.stage));
+  const over=active.filter(l=>bucket(l)==='overdue'), today=active.filter(l=>bucket(l)==='today'), upcoming=active.filter(l=>bucket(l)==='upcoming');
+  $('mAll').textContent=active.length;$('mOver').textContent=over.length;$('mToday').textContent=today.length;$('mNext').textContent=upcoming.length;
+  $('agendaOver').textContent=over.length;$('agendaToday').textContent=today.length;
+  const next=active.filter(l=>l.followup).sort((a,b)=>new Date(a.followup)-new Date(b.followup))[0];
+  $('agendaNext').textContent=next?fmt(next.followup):'Sin fecha';
+  let rows=leads.filter(l=>{
+    if(ch&&l.channel!==ch)return false;if(st&&l.stage!==st)return false;if(dateFilter!=='all'&&bucket(l)!==dateFilter)return false;
+    const hay=(l.name+' '+(l.vehicle||'')+' '+(l.nextAction||'')+' '+(l.contact||'')).toLowerCase(); return !q||hay.includes(q)
+  });
+  const order={overdue:0,today:1,upcoming:2,nodate:3};
+  rows.sort((a,b)=>(order[bucket(a)]??9)-(order[bucket(b)]??9)||new Date(a.followup||'2999-01-01')-new Date(b.followup||'2999-01-01'));
+  $('leadList').innerHTML=rows.length?rows.map(l=>{
+    const b=bucket(l), cls=b==='overdue'?'bad':b==='today'?'warn':'blue';
+    return '<article class="item"><div class="itemtop"><div><strong>'+esc(l.name)+'</strong><div class="sub">'+esc(l.vehicle||'Sin vehículo asociado')+'</div></div><span class="tag '+(l.channel==='WHATSAPP'?'ok':'blue')+'">'+esc(l.channel)+'</span></div>'+
+      '<div class="tags"><span class="tag">'+esc(l.stage)+'</span><span class="tag '+cls+'">'+(b==='overdue'?'VENCIDO':b==='today'?'HOY':b==='upcoming'?'PRÓXIMO':'SIN FECHA')+'</span><span class="tag">'+esc(l.priority||'NORMAL')+'</span></div>'+
+      '<div class="sub" style="margin-top:10px">PRÓXIMA ACCIÓN · '+esc(fmt(l.followup))+'</div><strong style="display:block;margin-top:4px;font-size:12px">'+esc(l.nextAction||'Definir siguiente acción')+'</strong>'+
+      '<div class="actions"><button class="btn ok" onclick="contacted(\''+l.id+'\')">CONTACTADO</button><button class="btn" onclick="editLead(\''+l.id+'\')">ABRIR</button></div></article>'
+  }).join(''):'<div class="empty">No hay leads en esta vista.</div>';
 }
+function openLead(l=null){
+  $('leadId').value=l?.id||'';$('leadModalTitle').textContent=l?'Editar lead':'Nuevo lead';
+  ['name','contact','vehicle','followup','lastContact','nextAction','notes'].forEach(id=>$(id).value=l?.[id]||'');
+  $('channel').value=l?.channel||'WHATSAPP';$('stage').value=l?.stage||'NUEVO';$('priority').value=l?.priority||'NORMAL';
+  $('leadModal').classList.add('open');
+}
+function editLead(id){openLead(leads.find(x=>x.id===id))}
 function contacted(id){
- const l=leads.find(x=>x.id===id);if(!l)return;
- l.lastContact=new Date().toISOString().slice(0,16);
- if(l.stage==='NUEVO')l.stage='CONTACTADO';
- if(confirm('¿Quieres reprogramar el próximo seguimiento?'))openModal(l);else save()
+  const l=leads.find(x=>x.id===id);if(!l)return;l.lastContact=new Date().toISOString().slice(0,16);if(l.stage==='NUEVO')l.stage='CONTACTADO';saveLeads()
 }
+function localValue(d){const z=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate())+'T'+z(d.getHours())+':'+z(d.getMinutes())}
+document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>{
+  const d=new Date(),m=b.dataset.quick;
+  if(m==='today')d.setHours(d.getHours()+2,0,0,0);
+  if(m==='tomorrow'){d.setDate(d.getDate()+1);d.setHours(10,0,0,0)}
+  if(m==='3days'){d.setDate(d.getDate()+3);d.setHours(10,0,0,0)}
+  if(m==='7days'){d.setDate(d.getDate()+7);d.setHours(10,0,0,0)}
+  $('followup').value=localValue(d)
+}));
+$('newLead').onclick=()=>openLead();
+$('cancelLead').onclick=()=>$('leadModal').classList.remove('open');
+$('leadModal').onclick=e=>{if(e.target===$('leadModal'))$('leadModal').classList.remove('open')};
 $('saveLead').onclick=()=>{
- if(!$('name').value.trim()){alert('Falta nombre o alias');return}
- const id=$('leadId').value||crypto.randomUUID(), old=leads.find(x=>x.id===id);
- const obj={id,name:$('name').value.trim(),channel:$('leadChannel').value,contact:$('contact').value.trim(),vehicle:$('vehicle').value.trim(),stage:$('leadStage').value,priority:$('priority').value,followup:$('followup').value,lastContact:$('lastContact').value,nextAction:$('nextAction').value.trim(),notes:$('notes').value.trim(),created:old?.created||new Date().toISOString(),updated:new Date().toISOString()};
- leads=old?leads.map(x=>x.id===id?obj:x):[obj,...leads];$('modalBack').classList.remove('open');save()
+  if(!$('name').value.trim()){alert('Falta nombre o alias');return}
+  const id=$('leadId').value||crypto.randomUUID(),old=leads.find(x=>x.id===id);
+  const obj={id,name:$('name').value.trim(),channel:$('channel').value,contact:$('contact').value.trim(),vehicle:$('vehicle').value.trim(),stage:$('stage').value,priority:$('priority').value,followup:$('followup').value,lastContact:$('lastContact').value,nextAction:$('nextAction').value.trim(),notes:$('notes').value.trim(),created:old?.created||new Date().toISOString(),updated:new Date().toISOString()};
+  leads=old?leads.map(x=>x.id===id?obj:x):[obj,...leads];$('leadModal').classList.remove('open');saveLeads()
 };
-$('newLead').onclick=()=>openModal();$('cancelModal').onclick=()=>$('modalBack').classList.remove('open');
-document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>quickSchedule(b.dataset.quick)));
-$('modalBack').onclick=e=>{if(e.target===$('modalBack'))$('modalBack').classList.remove('open')};
-['search','channel','stage'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',render));
-document.querySelectorAll('[data-filterdate]').forEach(b=>b.onclick=()=>{dateFilter=b.dataset.filterdate;document.querySelectorAll('[data-filterdate]').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()});
-$('exportBtn').onclick=()=>{
- const blob=new Blob([JSON.stringify({version:1,exportedAt:new Date().toISOString(),leads},null,2)],{type:'application/json'});
- const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='afl-autos-leads-demo1.json';a.click();URL.revokeObjectURL(a.href)
+['leadSearch','leadChannel','leadStage'].forEach(id=>$(id).addEventListener(id==='leadSearch'?'input':'change',renderLeads));
+document.querySelectorAll('[data-datefilter]').forEach(b=>b.onclick=()=>{dateFilter=b.dataset.datefilter;renderLeads()});
+$('leadExport').onclick=()=>downloadJSON('afl-autos-leads-demo2.json',{version:2,exportedAt:new Date().toISOString(),leads});
+
+function renderVehicles(){
+  $('vehicleList').innerHTML=vehicles.map(v=>{
+    const attrs=Object.keys(v.attrs||{}).slice(0,3).map(k=>'<span class="tag">'+esc(k)+': '+esc(v.attrs[k])+'</span>').join('');
+    return '<article class="card"><div class="vehiclehero">FOTO / HERO LOCAL</div><div class="vehiclemeta"><div><strong>'+esc(v.name)+'</strong><div class="sub">'+esc(v.code||'Sin código')+'</div></div><span class="tag blue">'+esc(v.status)+'</span></div><div class="tags">'+(attrs||'<span class="tag">SIN ATRIBUTOS</span>')+'</div><div class="stagebar"><span class="stage on"></span><span class="stage on"></span><span class="stage"></span><span class="stage"></span></div><div class="actions"><button class="btn" onclick="editVehicle(\''+v.id+'\')">EDITAR FICHA</button><button class="btn" onclick="sendToProduction(\''+v.id+'\')">PRODUCCIÓN</button></div></article>'
+  }).join('');
+}
+function openVehicle(v=null){
+  $('vehicleId').value=v?.id||'';$('vehicleModalTitle').textContent=v?'Editar vehículo':'Nuevo vehículo demo';
+  $('vName').value=v?.name||'';$('vCode').value=v?.code||'';$('vStatus').value=v?.status||'PENDIENTE_REVISION';$('vPrice').value=v?.price||'';
+  $('vJson').value=JSON.stringify(v?.attrs||{},null,2);$('vehicleModal').classList.add('open')
+}
+function editVehicle(id){openVehicle(vehicles.find(v=>v.id===id))}
+function sendToProduction(id){$('prodVehicle').value=id;go('production')}
+$('newVehicle').onclick=()=>openVehicle();
+$('cancelVehicle').onclick=()=>$('vehicleModal').classList.remove('open');
+$('vehicleModal').onclick=e=>{if(e.target===$('vehicleModal'))$('vehicleModal').classList.remove('open')};
+$('saveVehicle').onclick=()=>{
+  if(!$('vName').value.trim()){alert('Falta nombre del vehículo');return}
+  let attrs={};try{attrs=JSON.parse($('vJson').value||'{}')}catch{alert('Atributos JSON no válidos');return}
+  const id=$('vehicleId').value||crypto.randomUUID(),old=vehicles.find(v=>v.id===id);
+  const obj={id,name:$('vName').value.trim(),code:$('vCode').value.trim(),status:$('vStatus').value,price:$('vPrice').value.trim(),attrs,created:old?.created||new Date().toISOString(),updated:new Date().toISOString()};
+  vehicles=old?vehicles.map(v=>v.id===id?obj:v):[obj,...vehicles];$('vehicleModal').classList.remove('open');saveVehicles()
 };
-$('importBtn').onclick=()=>$('importFile').click();
-$('importFile').onchange=async e=>{try{const j=JSON.parse(await e.target.files[0].text());if(!Array.isArray(j.leads))throw 0;if(confirm('Esto reemplazará los leads actuales de esta demo.')){leads=j.leads;save()}}catch{alert('JSON no válido')}e.target.value=''};
-window.editLead=editLead;window.contacted=contacted;window.reschedule=reschedule;window.exportICS=exportICS;render();
+
+function renderProductionVehicles(){
+  $('prodVehicle').innerHTML=vehicles.map(v=>'<option value="'+v.id+'">'+esc(v.name)+'</option>').join('')
+}
+$('registerProduction').onclick=()=>{
+  const v=vehicles.find(x=>x.id===$('prodVehicle').value);if(!v)return;
+  const log={vehicle:v.name,stage:$('prodStage').value,note:$('prodNote').value.trim(),at:new Date().toISOString()};
+  localStorage.setItem(PROD_KEY,JSON.stringify(log));renderProductionLog()
+};
+$('clearProduction').onclick=()=>{$('prodNote').value='';localStorage.removeItem(PROD_KEY);renderProductionLog()};
+function renderProductionLog(){
+  const l=JSON.parse(localStorage.getItem(PROD_KEY)||'null');
+  $('prodLog').textContent=l?('VEHÍCULO: '+l.vehicle+'\nETAPA: '+l.stage+'\nOBJETIVO: '+(l.note||'Sin nota')+'\nREGISTRADO: '+fmt(l.at)):'Sin registros.'
+}
+
+function renderLinks(){
+  Object.keys(privateLinks).forEach(k=>{if($(k))$(k).value=privateLinks[k]||''})
+}
+document.querySelectorAll('[data-save-link]').forEach(b=>b.onclick=()=>{
+  const id=b.dataset.saveLink;privateLinks[id]=$(id).value.trim();localStorage.setItem(LINKS_KEY,JSON.stringify(privateLinks));alert('Guardado solo en este navegador.')
+});
+document.querySelectorAll('[data-open-link]').forEach(b=>b.onclick=()=>{
+  const u=privateLinks[b.dataset.openLink]||$(b.dataset.openLink).value.trim();if(!u){alert('Primero configura el enlace.');return}
+  window.open(u,'_blank','noopener,noreferrer')
+});
+document.querySelectorAll('[data-clear-link]').forEach(b=>b.onclick=()=>{
+  const id=b.dataset.clearLink;delete privateLinks[id];$(id).value='';localStorage.setItem(LINKS_KEY,JSON.stringify(privateLinks))
+});
+
+function downloadJSON(name,obj){
+  const blob=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)
+}
+$('exportAll').onclick=()=>downloadJSON('afl-autos-home-ux-demo2-backup.json',{version:2,exportedAt:new Date().toISOString(),leads,vehicles,links:Object.keys(privateLinks)});
+
+window.editLead=editLead;window.contacted=contacted;window.editVehicle=editVehicle;window.sendToProduction=sendToProduction;
+renderLeads();renderVehicles();renderProductionVehicles();renderProductionLog();renderLinks();renderHome();
 </script>
 </body>
 </html>
